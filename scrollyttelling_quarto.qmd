@@ -1,0 +1,321 @@
+---
+title: "L'aquaculture"
+subtitle: "L'aquaculture consiste à élever des animaux ou cultiver des plantes en milieu aquatique. Pour l'essentiel, ces productions visent la consommation humaine ou le repeuplement des rivières et des étangs. La culture des algues intéresse aussi des industries comme la pharmacie ou la cosmétique."
+format:
+  html:
+    toc: true
+title-block-banner: true
+page-layout: full
+---
+
+::: {style="width: 800px;  background-color: LightGrey ; border: 5px LightBlue;   padding: 50px;   margin: 20px;"}
+3145 : C'est le nombre d'entreprises pratiquant l'aquaculture en France métropolitaine. Elles occupent un peu plus de 11 000 « équivalents temps plein » (ETP).
+:::
+
+Particulièrement diversifiée dans notre pays, l'aquaculture recouvre cinq filières, chacune suivie par un questionnaire spécifique d'une enquête annuelle Agreste :
+
+• la conchyliculture (culture des coquillages) et l'élevage de crustacés : huître, moule, coquille Saint-Jacques, palourde, coque, crevette...
+
+• la pisciculture marine : bar, daurade, maigre, turbot, saumon atlantique...
+
+• la pisciculture en étang : carpe, gardon, tanche, brochet, sandre, perche...
+
+• la pisciculture en eau douce hors étangs : truite (arc-en-ciel, fario), esturgeon , omble, saumon de fontaine...
+
+• la culture d'algues et de cyanobactéries : microalgues , macroalgues et spiruline.
+
+En 2021, la production aquacole française s'élève à 194 000 tonnes en ventes finales. Cela représente 811 millions d'€.
+
+```{ojs}
+//| echo: false
+data_1 = FileAttachment("data/graphique_1.json").json()
+```
+
+```{ojs}
+//| echo: false
+graphique_1 = html`<div style="height:600px;width:1000px;"></div>`
+```
+
+```{ojs}
+//| echo: false
+//| output: false  
+option_1 = ({
+  title: {
+          top: 5,
+          left: 'center',
+          text: "Répartition du chiffre d’affaires (CA) de la filière aquacole en 2021 – en millions d'€",
+          subtext: 'Source : Agreste - Enquête Aquaculture 2021 - France métropolitaine'
+        },
+  series: [
+    {
+      type: 'treemap',
+      data: data_1
+    }
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+//| output: false  
+echarts.init(graphique_1).setOption(option_1)
+```
+
+La conchyliculture (y.c. crustacés) assure 70 % du CA de l'aquaculture. Les huîtres représentent à elles seules 50 % de l'activité.
+
+Au sein de la pisciculture, les truites dominent. Elles occupent dans l'ensemble une part équivalente à celle des moules, autour de 18 % du CA total.
+
+La production de caviar, bien que modeste, prend une place notable dans le CA total de l'aquaculture (3 % pour 26 millions d'€) du fait de prix moyens élevés.
+
+```{ojs}
+//| output: false
+//| echo: false
+// import and instantiate the scrollama
+scrollama = require("scrollama@3.1.1")
+
+d3 = require("d3@6/dist/d3.min.js")
+
+scroller = {var scroller = scrollama(); return scroller}
+main = {var main = d3.select("main");return(main)}
+scrolly = {var scrolly = main.select("#scrolly");return(scrolly)}
+figure = {var figure = scrolly.select("figure");return(figure)}
+article = {var article = scrolly.select("article");return(article)}
+step = {var step = article.selectAll(".step");return(step)}
+		// initialize the scrollama
+
+
+		// generic window resize listener event
+		function handleResize() {
+			// 1. update height of step elements
+			var stepH = Math.floor(window.innerHeight * 0.75);
+			step.style("height", stepH + "px");
+
+			var figureHeight = window.innerHeight / 2;
+			var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+			figure
+				.style("height", figureHeight + "px")
+				.style("top", figureMarginTop + "px");
+
+			// 3. tell scrollama to update new element dimensions
+			scroller.resize();
+		}
+
+		// scrollama event handlers
+		function handleStepEnter(response) {
+			console.log(response);
+			// response = { element, direction, index }
+
+			// add color to current step only
+			step.classed("is-active", function (d, i) {
+				return i === response.index;
+			});
+      a.setOption(options[response.index])  
+			// update graphic based on step
+			//figure.select("p").text(response.index + 1);
+		}
+
+		function init() {
+
+			// 1. force a resize on load to ensure proper dimensions are sent to scrollama
+			handleResize();
+
+			// 2. setup the scroller passing options
+			// 		this will also initialize trigger observations
+			// 3. bind scrollama event handlers (this can be chained like below)
+		
+			scroller
+				.setup({
+					step: "#scrolly article .step",
+					offset: 0.33,
+					debug: false
+				})
+				.onStepEnter(handleStepEnter);
+				a.setOption(options[0]) 
+		}
+
+		// kick things off
+		init();
+```
+
+```{=html}
+    <style>
+        #scrolly {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            background-color: #f3f3f3;
+            padding: 1rem;
+        }
+
+        #scrolly>* {
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+
+        article {
+            position: relative;
+            padding: 0 1rem;
+            max-width: 20rem;
+        }
+
+        figure {
+            position: -webkit-sticky;
+            position: sticky;
+            width: 100%;
+            margin: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            background-color: #8a8a8a;
+            z-index: 0;
+        }
+
+        figure p {
+            text-align: center;
+            padding: 1rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .step {
+            margin: 0 auto 2rem auto;
+            background-color: #3b3b3b;
+            color: #fff;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step.is-active {
+            background-color: goldenrod;
+            color: #3b3b3b;
+        }
+
+        .step p {
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.5rem;
+        }
+    </style>
+```
+```{=html}
+<section id="scrolly">
+            <article>
+```
+::: {.step data-step="1"}
+Selon que l'on considère la production en chiffre d'affaires ou en volume, la répartition est un peu différente, même si la hiérarchie des trois principales cultures reste la même.
+:::
+
+::: {.step data-step="1"}
+En tonnage, les moules se rapprochent des huîtres. Les prix de vente expliquent ces répartitions différentes : au kilo, les huîtres se vendent à 5 € en moyenne, les truites à 4,1 € le kg et les muoules à 2.25 €. Le caviar français s'échange pour sa part à plus de 500 € le kg.
+:::
+
+```{=html}
+            </article>
+            <figure>
+                
+                <div id=main_graph style="height:400px;width:600px;"></div>
+            </figure>
+</section>
+```
+```{ojs}
+//| echo: false
+option_2a = ({
+  title: {
+    text: "Répartition du CA de l'aquaculture (en millions d'€) en 2021",
+    subtext: 'Source : Agreste - Enquête Aquaculture 2021 - France métropolitaine',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b} : {c} ({d}%)'
+  },
+  series: [
+    {
+      name: 'Euros',
+      type: 'pie',
+      radius: '60%',
+      data: data_2a,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+})
+
+
+
+```
+
+```{ojs}
+//| echo: false
+option_2b = ({
+  title: {
+    text: "Répartition de la production de l'aquaculture (en tonnes) en 2021",
+    subtext: 'Source : Agreste - Enquête Aquaculture 2021 - France métropolitaine',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b} : {c} ({d}%)'
+  },
+  series: [
+    {
+      name: 'Tonnes',
+      type: 'pie',
+      radius: '60%',
+      data: data_2b,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+})
+
+
+
+```
+
+```{ojs}
+//| echo: false
+options = {const options={0:option_2a,1:option_2b}; return options}
+```
+
+```{ojs}
+//| echo: false
+data_2a = FileAttachment("data/graphique_2a.csv").csv()
+```
+
+```{ojs}
+//| echo: false
+data_2b = FileAttachment("data/graphique_2b.csv").csv()
+```
+
+```{ojs}
+//| echo: false
+echarts = require('https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js')
+```
+
+```{ojs}
+//| echo: false
+a = echarts.init(document.getElementById("main_graph"))
+```
