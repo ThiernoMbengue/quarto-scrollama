@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Conchyliculture",
+    "value": 565,
+    "children": [
+      {
+        "name": "Huîtres",
+        "value": 403
+      },
+      {
+        "name": "Moules",
+        "value": 149
+      },
+      {
+        "name": "Autres",
+        "value": 13.6
+      }
+    ]
+  },
+  {
+    "name": "Pisciculture",
+    "value": 233,
+    "children": [
+      {
+        "name": "Truites et autres salmonidés",
+        "value": 141
+      },
+      {
+        "name": "Poissons eau de mer",
+        "value": 49
+      },
+      {
+        "name": "Esturgeons",
+        "value": 26
+      },
+      {
+        "name": "Poissons étangs",
+        "value": 12
+      },
+      {
+        "name": "Autres",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "name": "Algues et spiruline",
+    "value": 8
+  }
+]
