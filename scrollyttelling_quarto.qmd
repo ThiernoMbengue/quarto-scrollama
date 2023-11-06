@@ -4,6 +4,7 @@ subtitle: "L'aquaculture consiste à élever des animaux ou cultiver des plantes
 format:
   html:
     toc: true
+    css: styles.css
 title-block-banner: true
 page-layout: full
 ---
@@ -72,14 +73,13 @@ La production de caviar, bien que modeste, prend une place notable dans le CA to
 //| echo: false
 // import and instantiate the scrollama
 scrollama = require("scrollama@3.1.1")
-
 d3 = require("d3@6/dist/d3.min.js")
 
 scroller = {var scroller = scrollama(); return scroller}
 main = {var main = d3.select("main");return(main)}
 scrolly = {var scrolly = main.select("#scrolly");return(scrolly)}
-figure = {var figure = scrolly.select("figure");return(figure)}
-article = {var article = scrolly.select("article");return(article)}
+figure = {var figure = scrolly.select("#figdiv");return(figure)}
+article = {var article = scrolly.select("conteneur");return(article)}
 step = {var step = article.selectAll(".step");return(step)}
 		// initialize the scrollama
 
@@ -126,7 +126,7 @@ step = {var step = article.selectAll(".step");return(step)}
 		
 			scroller
 				.setup({
-					step: "#scrolly article .step",
+					step: "#scrolly .step",
 					offset: 0.33,
 					debug: false
 				})
@@ -138,97 +138,33 @@ step = {var step = article.selectAll(".step");return(step)}
 		init();
 ```
 
-```{=html}
-    <style>
-        #scrolly {
-            position: relative;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            background-color: #f3f3f3;
-            padding: 1rem;
-        }
 
-        #scrolly>* {
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-        }
+::: {id=scrolly}
 
-        article {
-            position: relative;
-            padding: 0 1rem;
-            max-width: 20rem;
-        }
+::: {id=conteneur}
 
-        figure {
-            position: -webkit-sticky;
-            position: sticky;
-            width: 100%;
-            margin: 0;
-            -webkit-transform: translate3d(0, 0, 0);
-            -moz-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-            background-color: #8a8a8a;
-            z-index: 0;
-        }
-
-        figure p {
-            text-align: center;
-            padding: 1rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -moz-transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            font-size: 8rem;
-            font-weight: 900;
-            color: #fff;
-        }
-
-        .step {
-            margin: 0 auto 2rem auto;
-            background-color: #3b3b3b;
-            color: #fff;
-        }
-
-        .step:last-child {
-            margin-bottom: 0;
-        }
-
-        .step.is-active {
-            background-color: goldenrod;
-            color: #3b3b3b;
-        }
-
-        .step p {
-            text-align: center;
-            padding: 1rem;
-            font-size: 1.5rem;
-        }
-    </style>
-```
-```{=html}
-<section id="scrolly">
-            <article>
-```
 ::: {.step data-step="1"}
 Selon que l'on considère la production en chiffre d'affaires ou en volume, la répartition est un peu différente, même si la hiérarchie des trois principales cultures reste la même.
 :::
 
-::: {.step data-step="1"}
+::: {.step data-step="2"}
 En tonnage, les moules se rapprochent des huîtres. Les prix de vente expliquent ces répartitions différentes : au kilo, les huîtres se vendent à 5 € en moyenne, les truites à 4,1 € le kg et les muoules à 2.25 €. Le caviar français s'échange pour sa part à plus de 500 € le kg.
 :::
 
-```{=html}
-            </article>
-            <figure>
-                
-                <div id=main_graph style="height:400px;width:600px;"></div>
-            </figure>
-</section>
-```
+Dans les graphiques et commentaires suivants, Europe fait référence à l'Union européenne des Vingt-Sept en 2020 (donc sans le Royaume-Uni).
+
+
+:::
+
+::: {id=figdiv}
+::: {id=main_graph style="height:400px;width:600px;"}
+:::
+
+:::
+
+
+:::
+
 ```{ojs}
 //| echo: false
 option_2a = ({
