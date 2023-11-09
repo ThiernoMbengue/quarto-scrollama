@@ -140,7 +140,6 @@ step = {var step = article.selectAll(".step");return(step)}
 
 
 ::: {id=scrolly}
-
 ::: {id=conteneur}
 
 ::: {.step data-step="1"}
@@ -151,19 +150,72 @@ Selon que l'on considère la production en chiffre d'affaires ou en volume, la r
 En tonnage, les moules se rapprochent des huîtres. Les prix de vente expliquent ces répartitions différentes : au kilo, les huîtres se vendent à 5 € en moyenne, les truites à 4,1 € le kg et les muoules à 2.25 €. Le caviar français s'échange pour sa part à plus de 500 € le kg.
 :::
 
-Dans les graphiques et commentaires suivants, Europe fait référence à l'Union européenne des Vingt-Sept en 2020 (donc sans le Royaume-Uni).
+::: {.step data-step="3"}
+La France est le principal producteur aquacole européen [^1]: premier en valeur et deuxième en volume derrière l’Espagne
+:::
 
+
+::: {.step data-step="4"}
+Donec sollicitudin arcu lectus, consectetur tristique arcu efficitur efficitur. Integer bibendum diam magna, eu interdum mauris condimentum tempus. Donec turpis tellus, auctor quis diam ut, gravida commodo turpis.
+:::
 
 :::
 
 ::: {id=figdiv}
 ::: {id=main_graph style="height:400px;width:600px;"}
 :::
+:::
 
 :::
 
 
+<br> 
+
+ipsum non pellentesque pharetra, tortor velit efficitur leo, ac tincidunt justo metus quis arcu. Aliquam sit amet nisl non quam consequat ullamcorper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum elementum neque sit amet convallis.
+
+<br><br>    
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vehicula rhoncus nulla, non posuere eros consectetur at. Donec id nisi et diam tincidunt mattis. Sed tempor elit quis nibh luctus consectetur. Vestibulum vel eleifend sem. Aenean in vulputate mi, vulputate facilisis ligula. Nam sollicitudin velit mi, sagittis suscipit tortor malesuada in. Nam dignissim fringilla sapien nec rutrum. Vivamus ac augue velit. Proin pretium vitae ligula sed malesuada. Nulla finibus augue semper dui molestie varius.
+
+<br><br>  
+
+Donec sollicitudin arcu lectus, consectetur tristique arcu efficitur efficitur. Integer bibendum diam magna, eu interdum mauris condimentum tempus. Donec turpis tellus, auctor quis diam ut, gravida commodo turpis. Aenean blandit, ipsum non pellentesque pharetra, tortor velit efficitur leo, ac tincidunt justo metus quis arcu. Aliquam sit amet nisl non quam consequat ullamcorper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum elementum neque sit amet convallis. 
+
+
+::: {id=scrolly}
+::: {id=conteneur}
+
+::: {.step data-step="1"}
+Selon que l'on considère la production en chiffre d'affaires ou en volume, la répartition est un peu différente, même si la hiérarchie des trois principales cultures reste la même.
 :::
+
+::: {.step data-step="2"}
+En tonnage, les moules se rapprochent des huîtres. Les prix de vente expliquent ces répartitions différentes : au kilo, les huîtres se vendent à 5 € en moyenne, les truites à 4,1 € le kg et les muoules à 2.25 €. Le caviar français s'échange pour sa part à plus de 500 € le kg.
+:::
+
+::: {.step data-step="3"}
+La France est le principal producteur aquacole européen [^1]: premier en valeur et deuxième en volume derrière l’Espagne
+:::
+
+
+::: {.step data-step="4"}
+Donec sollicitudin arcu lectus, consectetur tristique arcu efficitur efficitur. Integer bibendum diam magna, eu interdum mauris condimentum tempus. Donec turpis tellus, auctor quis diam ut, gravida commodo turpis.
+:::
+
+:::
+
+::: {id=figdiv}
+::: {id=main_graph style="height:400px;width:600px;"}
+:::
+:::
+
+:::
+
+
+
+
+
+
 
 ```{ojs}
 //| echo: false
@@ -227,13 +279,91 @@ option_2b = ({
   ]
 })
 
-
-
 ```
+
 
 ```{ojs}
 //| echo: false
-options = {const options={0:option_2a,1:option_2b}; return options}
+option_2c = ({
+  title: {
+    text: "Production aquacole en valeur pour les 10 principaux producteurs européens en 2020 (millions d’€)"
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  legend: {},
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    boundaryGap: [0, 0.01]
+  },
+  yAxis: {
+    type: 'category',
+    data: data_2c.map(d=>d.pays)
+  },
+  series: [
+    {
+      
+      type: 'bar',
+      data: data_2c.map(d=>d.prod_valeur)
+    }
+  ]
+});
+```
+
+
+```{ojs}
+//| echo: false
+option_2d = ({
+  title: {
+    text: "Production aquacole en volume pour les 10 principaux producteurs européens en 2020 (millions d’€)"
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  legend: {},
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    boundaryGap: [0, 0.01]
+  },
+  yAxis: {
+    type: 'category',
+    data: data_2d.map(d=>d.pays)
+  },
+  series: [
+    {
+      
+      type: 'bar',
+      data: data_2d.map(d=>d.prod_volume)
+    }
+  ]
+});
+```
+
+
+
+
+
+```{ojs}
+//| echo: false
+options = {const options={0:option_2a,1:option_2b, 2:option_2c, 3:option_2d}; return options}
 ```
 
 ```{ojs}
@@ -248,6 +378,18 @@ data_2b = FileAttachment("data/graphique_2b.csv").csv()
 
 ```{ojs}
 //| echo: false
+data_2c = FileAttachment("data/graphique_2c.csv").csv()
+```
+
+```{ojs}
+//| echo: false
+data_2d = FileAttachment("data/graphique_2d.csv").csv()
+```
+
+
+
+```{ojs}
+//| echo: false
 echarts = require('https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js')
 ```
 
@@ -255,3 +397,7 @@ echarts = require('https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js')
 //| echo: false
 a = echarts.init(document.getElementById("main_graph"))
 ```
+
+
+
+[^1]: Dans les graphiques et commentaires suivants, Europe fait référence à l'Union européenne des Vingt-Sept en 2020 (donc sans le Royaume-Uni).
